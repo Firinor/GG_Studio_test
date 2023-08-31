@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a727c29b7f0714abc919e2cf6e0d94, type: 3}
   m_Name: Armor destruction
   m_EditorClassIdentifier: 
-  duration: 2
+  Duration: 4
   attributes:
   - Attribute: 1
     Value: -10

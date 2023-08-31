@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ce17b8f1166684a91bdf542b98cf82, type: 3}
   m_Name: Double damage
   m_EditorClassIdentifier: 
-  duration: 2
+  Duration: 4
   AllAttributesMultiplication: 2

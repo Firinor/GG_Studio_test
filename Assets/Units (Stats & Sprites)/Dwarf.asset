@@ -16,7 +16,7 @@ MonoBehaviour:
   HealthPoint: 100
   MaxHealthPoint: 100
   DefenceRate: 0
-  MaxDefenceRate: 1
+  MaxDefenceRate: 100
   VampiricRate: 0
-  MaxVampiricRate: 0
+  MaxVampiricRate: 100
   BuffLimit: 2

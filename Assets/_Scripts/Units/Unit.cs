@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Utility;
+using Utility.UniRx;
 using Zenject;
 
 public class Unit : MonoBehaviour
@@ -17,14 +18,13 @@ public class Unit : MonoBehaviour
     private UnitBasisStats basisStats;
     private UnitAttributes currentStats = new UnitAttributes()
     {
-        {Attribute.Attack, new FloatReactiveProperty() },
-        {Attribute.Defence, new FloatReactiveProperty() },
-        {Attribute.Health, new FloatReactiveProperty() },
-        {Attribute.Vampiric, new FloatReactiveProperty() } 
+        {Attribute.Attack, new LimitedFloatReactiveProperty() },
+        {Attribute.Defence, new LimitedFloatReactiveProperty() },
+        {Attribute.Health, new LimitedFloatReactiveProperty() },
+        {Attribute.Vampiric, new LimitedFloatReactiveProperty() } 
     };
 
     public ReactiveCollection<Buff> Buffs;
-    //private List<Buff> buffs = new List<Buff>();
 
     public BoolReactiveProperty isReady;
     public BoolReactiveProperty isReadyToBuff;
@@ -35,20 +35,59 @@ public class Unit : MonoBehaviour
         get { return currentStats[Attribute.Health].Value; }
         set
         {
-            currentStats[Attribute.Health].Value = Math.Min(value, basisStats.MaxHealthPoint);
+            currentStats[Attribute.Health].Value = value;
             if (value <= 0)
                 gameManager.GameOver();
         }
     }
-    public FloatReactiveProperty this[Attribute key] => currentStats[key];
+    public LimitedFloatReactiveProperty this[Attribute key] => currentStats[key];
 
 
     private void Awake()
     {
-        currentStats[Attribute.Attack].Value = basisStats.Attack;
-        currentStats[Attribute.Defence].Value = basisStats.DefenceRate;
-        currentStats[Attribute.Health].Value = basisStats.HealthPoint;
-        currentStats[Attribute.Vampiric].Value = basisStats.VampiricRate;
+        InitStats();
+    }
+
+    private void InitStats()
+    {
+        InitAttack();
+        InitHealth();
+        InitDefence();
+        InitVampiric();
+    }
+
+    private void InitAttack()
+    {
+        var stat = currentStats[Attribute.Attack];
+        stat.MinLimit = true;
+        stat.MinValue = 1;
+        stat.Value = basisStats.Attack;
+    }
+    private void InitHealth()
+    {
+        var stat = currentStats[Attribute.Health];
+        stat.MaxLimit = true;
+        stat.MaxValue = basisStats.MaxHealthPoint;
+        stat.Value = basisStats.HealthPoint;
+    }
+    private void InitDefence()
+    {
+        var stat = currentStats[Attribute.Defence];
+        stat.MinLimit = true;
+        stat.MinValue = 0;
+        stat.MaxLimit = true;
+        stat.MaxValue = basisStats.MaxDefenceRate;
+        stat.Value = basisStats.DefenceRate;
+
+    }
+    private void InitVampiric()
+    {
+        var stat  = currentStats[Attribute.Vampiric];
+        stat.MinLimit = true;
+        stat.MinValue = 0;
+        stat.MaxLimit = true;
+        stat.MaxValue = basisStats.MaxVampiricRate;
+        stat.Value = basisStats.VampiricRate;
     }
 
     public void OnStartTurn()
@@ -67,10 +106,9 @@ public class Unit : MonoBehaviour
 
             i++;
         }
-        Buffs.ObserveCountChanged();
-        
+
         isReady.Value = true;
-        isReadyToBuff.Value = true;
+        isReadyToBuff.Value = Buffs.Count < basisStats.BuffLimit;
     }
 
     private void OnEndTurn()
@@ -128,10 +166,7 @@ public class Unit : MonoBehaviour
 
     private void AddToAttribute(Attribute attribute, float value)
     {
-        if (currentStats.ContainsKey(attribute))
-            currentStats[attribute].Value += value;
-        else
-            currentStats.Add(attribute, new FloatReactiveProperty(value));
+        currentStats[attribute].Value += value;
     }
 
 

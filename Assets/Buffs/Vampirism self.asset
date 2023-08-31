@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2386b9693c4cdbc418830ce3f13c6cc1, type: 3}
   m_Name: Vampirism self
   m_EditorClassIdentifier: 
-  duration: 2
+  Duration: 4
   attributes:
   - Attribute: 2
     Value: 50

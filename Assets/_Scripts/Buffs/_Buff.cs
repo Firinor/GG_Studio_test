@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UniRx;
 
 namespace Buffs
 {
     public class Buff
     {
         public string Name { get; private set; }
-        public int Duration { get; private set; }
-        public bool IsOver => Duration <= 0;
+        public IntReactiveProperty Duration { get; private set; }
+        public bool IsOver => Duration.Value <= 0;
 
         private Unit owner;
         public BuffCore BuffCore { get; private set; }
@@ -17,13 +16,13 @@ namespace Buffs
             owner = unit;
             this.BuffCore = BuffCore;
             Name = BuffCore.name;
-            Duration = BuffCore.duration;
+            Duration = new IntReactiveProperty(BuffCore.Duration);
 
             BuffCore.OnStart(owner);
         }
         public void Tick()
         {
-            Duration--;
+            Duration.Value--;
 
             BuffCore.Tick(owner);
 

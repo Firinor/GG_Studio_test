@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UniRx;
 using static TMPro.TMP_Dropdown;
 
 namespace Observers
 {
-    public class UnitBuffsObserver : MonoBehaviour, IObserver<int>
+    public class UnitBuffsListObserver : MonoBehaviour, IObserver<int>, IObserver<CollectionAddEvent<Buff>>
     {
         [SerializeField]
         private Unit unit;
@@ -38,9 +39,15 @@ namespace Observers
             dropdown.AddOptions(newOptions);
         }
 
+        public void OnNext(CollectionAddEvent<Buff> buff)
+        {
+            buff.Value.Duration.Subscribe(this);
+        }
+
         private void Awake()
         {
             unit.Buffs.ObserveCountChanged().Subscribe(this);
+            unit.Buffs.ObserveAdd().Subscribe(this);
         }
     }
 }

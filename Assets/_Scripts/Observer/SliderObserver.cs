@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Observers
 {
-    public class SliderButtonObserver : MonoBehaviour, IObserver<float>
+    public class SliderObserver : MonoBehaviour, IObserver<float>
     {
         [SerializeField]
         private Slider slider;

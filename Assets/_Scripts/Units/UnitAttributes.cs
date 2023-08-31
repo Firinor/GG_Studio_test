@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using UniRx;
+using Utility.UniRx;
 
-public class UnitAttributes : Dictionary<Attribute, FloatReactiveProperty>
+public class UnitAttributes : Dictionary<Attribute, LimitedFloatReactiveProperty>
 {
 }
