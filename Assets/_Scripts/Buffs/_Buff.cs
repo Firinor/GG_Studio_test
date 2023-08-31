@@ -5,8 +5,9 @@ namespace Buffs
 {
     public class Buff
     {
-        private int duration;
-        public bool IsOver => duration <= 0;
+        public string Name { get; private set; }
+        public int Duration { get; private set; }
+        public bool IsOver => Duration <= 0;
 
         private Unit owner;
         public BuffCore BuffCore { get; private set; }
@@ -15,13 +16,14 @@ namespace Buffs
         {
             owner = unit;
             this.BuffCore = BuffCore;
-            duration = BuffCore.duration;
+            Name = BuffCore.name;
+            Duration = BuffCore.duration;
 
             BuffCore.OnStart(owner);
         }
         public void Tick()
         {
-            duration--;
+            Duration--;
 
             BuffCore.Tick(owner);
 

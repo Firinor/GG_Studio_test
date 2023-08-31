@@ -1,14 +1,5 @@
-using Random = UnityEngine.Random;
-
-namespace Utility
+﻿namespace Utility
 {
-    public static class CardGame
-    {
-        public static int GetRandomCardFromTheDeck(int DeckLength)
-        {
-            return Random.Range(0, DeckLength);
-        }
-    }
     public static class Ratios
     {
         public static float PercentagesInRates(float percentage)
@@ -23,7 +14,7 @@ namespace Utility
 
         public static float ReduceByPercentage(float value, float percentage)
         {
-            return value *= 1 - PercentagesInRates(percentage);
+            return value * (1 - PercentagesInRates(percentage));
         }
     }
 }

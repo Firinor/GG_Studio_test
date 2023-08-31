@@ -9,7 +9,7 @@ namespace Buffs
 
         public override void Decorate(AttackData attackData)
         {
-            attackData.multiplicator *= AllAttributesMultiplication;
+            attackData.Multiplicator *= AllAttributesMultiplication;
         }
     }
 }

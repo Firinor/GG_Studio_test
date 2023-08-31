@@ -61,15 +61,23 @@
     <Compile Include="Assets\_Scripts\Buffs\_Buff.cs" />
     <Compile Include="Assets\_Scripts\_Enums.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Observer\UnitBuffsObserver.cs" />
+    <Compile Include="Assets\_Scripts\Unility\Ratios.cs" />
+    <Compile Include="Assets\_Scripts\View\GameOverBoard.cs" />
     <Compile Include="Assets\_Scripts\AttackData.cs" />
     <Compile Include="Assets\_Scripts\Units\Unit.cs" />
-    <Compile Include="Assets\GameOverBoard.cs" />
+    <Compile Include="Assets\_Scripts\Observer\AttackButtonObserver.cs" />
     <Compile Include="Assets\_Scripts\Buffs\AttributeBuff.cs" />
+    <Compile Include="Assets\_Scripts\Unility\CardGame.cs" />
+    <Compile Include="Assets\_Scripts\Observer\SliderButtonObserver.cs" />
     <Compile Include="Assets\_Scripts\Buffs\BuffCore.cs" />
     <Compile Include="Assets\_Scripts\Buffs\DecoratorBuff.cs" />
-    <Compile Include="Assets\_Scripts\Unility\GameMath.cs" />
+    <Compile Include="Assets\_Scripts\Observer\RoundTextObserver.cs" />
     <Compile Include="Assets\_Scripts\Buffs\MultiplicatorBuff.cs" />
+    <Compile Include="Assets\_Scripts\Observer\BuffButtonObserver.cs" />
     <Compile Include="Assets\_Scripts\Units\UnitAttributes.cs" />
+    <Compile Include="Assets\_Scripts\Units\UnitAttribute.cs" />
+    <Compile Include="Assets\_Scripts\Observer\GameOverObserver.cs" />
     <Compile Include="Assets\_Scripts\Units\UnitBasisStats.cs" />
   </ItemGroup>
   <ItemGroup>

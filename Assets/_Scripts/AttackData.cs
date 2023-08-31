@@ -2,6 +2,6 @@
 
 public class AttackData : Dictionary<Attribute, float>
 {
-    public int multiplicator = 1;
+    public int Multiplicator = 1;
 }
 
